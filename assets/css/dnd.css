@@ -1,0 +1,362 @@
+html {
+  /* background: linear-gradient(to bottom, #ba2727 0%, black 100%); */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  transition: 2s;
+}
+
+button {
+  cursor: pointer;
+}
+
+.header {
+  text-align: center;
+  font-size: 36px;
+  color: black;
+  font-family: Cinzel;
+  white-space: nowrap;
+  text-shadow: 2px 2px white;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.header h1 {
+  margin-bottom: 5px;
+}
+
+.lines {
+  text-align: center;
+}
+
+.dnd-button-container {
+  text-align: center;
+  height: 500px;
+}
+
+.startbutton {
+  margin-top: 165px;
+  border-radius: 180px;
+  font-family: Niconne;
+  font-style: italic;
+  font-weight: 600;
+  color: white;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  background: black;
+}
+
+.startbutton-large {
+  width: 450px;
+  height: 100px;
+  font-size: 50px;
+  background: rgba(0,0,0,1);
+  -webkit-transition: all 1.75s;
+  -moz-transition: all 1.75s;
+  -o-transition: all 1.75s;
+  transition:all 1.75s;
+}
+
+.startbutton-small {
+  width: 400px;
+  height: 100px;
+  font-size: 45px;
+  background: rgba(0,0,0,.7);
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition:all 1.5s;
+}
+
+.music-widget {
+  margin-top: 13px;
+  width: 40%;
+  height: 70px;
+  border-radius: 180px;
+  font-family: Niconne;
+  font-size: 35px;
+  font-weight: 600;
+  color: white;
+  border: 2px solid black;
+  outline: none;
+  white-space: nowrap;
+  background: rgba(0,0,0,1);
+  word-spacing: 10px;
+}
+
+.row {
+  height: 33.33%;
+}
+
+.row-small {
+  margin: 10px;
+  height: 100px;
+}
+
+.button-center {
+  margin: auto 100px auto 100px;
+}
+
+.playbutton {
+  margin-top: 50px;
+  width: 250px;
+  height: 75px;
+  border-radius: 180px;
+  font-family: Niconne;
+  font-size: 35px;
+  font-weight: 600;
+  color: white;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  background: rgba(0,0,0,1);
+}
+
+.menubutton {
+  margin-top: 35px;
+  width: 250px;
+  height: 75px;
+  border-radius: 180px;
+  font-family: Niconne;
+  font-size: 35px;
+  font-weight: 600;
+  color: white;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  background: rgba(0,0,0,1);
+}
+
+.lilbutton {
+  margin-top: 13px;
+  width: 200px;
+  height: 74px;
+  border-radius: 180px;
+  font-family: Niconne;
+  font-size: 35px;
+  font-weight: 600;
+  color: black;
+  border: 2px solid black;
+  outline: none;
+  white-space: nowrap;
+  background: rgba(0,0,0,1);
+}
+
+.lilbutton.left {
+  margin-right: 20px;
+}
+
+.lilbutton.right {
+  margin-left: 20px;
+}
+
+.lilbutton:hover {
+  color: white;
+}
+
+.widget-button:hover {
+  color: #d6d6d6;
+}
+
+.module {
+  width: 40%;
+  margin-top: 5px;
+  height: 100%;
+}
+
+.slidecontainer {
+  text-align: center;
+}
+
+.slidebg {
+  margin: 5px auto auto auto;
+  width: 20%;
+  height: 25px;
+  background: black;
+  border-radius: 180px;
+  border: 1px solid #404040;
+}
+
+#playlist-full-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlist-item {
+  width: 100%;
+  height: 29px;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 11px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.ghost {
+  color: rgba(217, 243, 255,.85);
+  background: rgba(217, 243, 255,.85);
+}
+
+.drag {
+  background: rgba(189, 234, 255, .85);
+  border: 1px solid #d1d1d1;
+}
+
+.playlist-item span {
+  margin-left: 15px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#volume-slider {
+  margin-top: 5px;
+  width: 90%;
+}
+
+#double-lines {
+  width: 40%;
+  height: 8px;
+}
+
+#start-container {
+  display: inherit;
+}
+
+#menu-container {
+  display: none;
+}
+
+#playing-container {
+  display: none;
+}
+
+#playlist-holder {
+  margin-left: 8%;
+  float: left;
+}
+
+#playlist {
+  width: 70%;
+  height: 85%;
+  background: rgba(189, 234, 255, .85);
+  border: 1px solid black;
+  margin: 5% auto auto auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-family: Cinzel;
+}
+
+#playlist-top {
+  width: 100%;
+  height: 12%;
+  background: rgba(132, 196, 224,.85);
+  margin: 0;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#playlist-top p {
+  float: left;
+  margin: 11px auto auto 15px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+#buttons-holder {
+  margin-right: 8%;
+  float: right;
+}
+
+#backbutton {
+  margin-bottom: 15px;
+}
+
+#forest {
+  color: #00a158;
+}
+
+#mountains {
+  color: #9fbfc4;
+}
+
+#village {
+  color: #dbce9c;
+}
+
+#city {
+  color: #c6e4f7;
+}
+
+#drylands {
+  color: #b07a1c;
+}
+
+#desert {
+  color: #db9807;
+}
+
+#swamp {
+  color: #4dba1e;
+}
+
+#fiery {
+  color: #ff6817;
+}
+
+#holyland {
+  color: #edc115;
+}
+
+#battle {
+  background: rgba(247, 40, 40,.85);
+}
+
+#vision {
+  background: rgba(199, 40, 247,.85);
+}
+
+#health {
+  background: rgba(9, 184, 32,.85);
+}
+
+#damage {
+  background: rgba(145,145,145,.85);
+}
+
+@media only screen and (max-width: 875px) {
+  .header {
+    font-size: 25px;
+  }
+  .dnd-button-container {
+    margin-top: 42px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    font-size: 20px;
+  }
+  .dnd-button-container {
+    margin-top: 63px;
+  }
+}

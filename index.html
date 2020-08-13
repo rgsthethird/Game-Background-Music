@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>D&D Soundtrack</title>
+    <link rel="stylesheet" href="assets/css/dnd.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Niconne&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bc00dcf7c2.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/js/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/Sortable-master/Sortable.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/howler.js-master/dist/howler.min.js"></script>
+
+  </head>
+  <body>
+
+    <div class="header">
+      <h1>D&D Soundtrack v1.0</h1>
+    </div>
+
+    <div class="lines">
+      <img id="double-lines" src="assets/images/double_line.png" alt="">
+    </div>
+
+    <div class="dnd-button-container" id="start-container">
+      <button type="button" id="startbutton" class="startbutton startbutton-small"><span id="starttext">Begin Your Journey</span></button>
+    </div>
+
+    <div class="dnd-button-container" id="menu-container">
+      <div class="row">
+        <button type="button" class="playbutton" id="mountains">🏔 <span>Mountains</span> 🏔</button>
+        <button type="button" class="playbutton button-center" id="drylands">🦂 <span>Drylands</span> 🦂</button>
+        <button type="button" class="playbutton" id="forest">🌲 <span>Forest</span> 🌲</button>
+      </div>
+      <div class="row">
+        <button type="button" class="playbutton" id="village">🏠 <span>Village</span> 🏠</button>
+        <button type="button" class="playbutton button-center" id="city">🏙 <span>City</span> 🏙</button>
+        <button type="button" class="playbutton" id="desert">🏜 <span>Desert</span> 🏜</button>
+      </div>
+      <div class="row">
+        <button type="button" class="playbutton" id="holyland">⚜ <span>Holy Land</span> ⚜</button>
+        <button type="button" class="playbutton button-center" id="swamp">🦠 <span>Swamp</span> 🦠</button>
+        <button type="button" class="playbutton" id="fiery">🌋 <span>Fiery</span> 🌋</button>
+      </div>
+    </div>
+
+    <div class="dnd-button-container" id="playing-container">
+      <div class="module" id="playlist-holder">
+        <div id="playlist">
+          <div id="playlist-top">
+            <p id="playlist-name">Playlist</p>
+          </div>
+          <ul id="playlist-full-list">
+            <li class="playlist-item"><span>fiery.mp3</span></li>
+            <li class="playlist-item"><span>fiery2.mp3</span></li>
+            <li class="playlist-item"><span>fiery3.mp3</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="module" id="buttons-holder">
+        <button type="button" class="menubutton" id="backbutton"><span>Back</span></button>
+        <div class="row-small">
+          <button type="button" class="lilbutton left" id="battle"><span>Battle</span></button>
+          <button type="button" class="lilbutton right" id="vision"><span>Vision</span></button>
+        </div>
+        <div class="row-small">
+          <button type="button" class="lilbutton left" id="health"><span>Health</span></button>
+          <button type="button" class="lilbutton right" id="damage"><span>Damage</span></button>
+        </div>
+        <div class="row-small">
+          <button type="button" class="music-widget"><span class="widget-button" id="rewind" style="padding-right: 18px"><i class="fas fa-step-backward"></i></span><span class="widget-button" id="pause"><i class="fas fa-pause"></i></span><span class="widget-button" id="end" style="padding-left: 18px"><i class="fas fa-step-forward"></i></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="slidecontainer">
+      <div class="slidebg">
+        <input type="range" min="0" max="100" value="49.5" id="volume-slider">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      var situations = {};
+      var playing = [];
+      var battlePlaying = false;
+
+      var bgMusic = new Howl({
+        src: ['assets/music/background2.mp3'],
+        volume: 0.5,
+        loop: true
+      });
+      playing.push(bgMusic);
+
+      var battleMusic = new Howl({
+        src: ['assets/music/battle.mp3'],
+        volume: 0.5,
+        loop: true
+      });
+
+      var healthEffect = new Howl({
+        src: ['assets/music/healthUp.mp3']
+      });
+
+      var damageEffects = [];
+
+      var damageEffect1 = new Howl({
+        src: ['assets/music/damage.mp3']
+      });
+
+      var damageEffect2 = new Howl({
+        src: ['assets/music/damage2.mp3']
+      });
+
+      var damageEffect3 = new Howl({
+        src: ['assets/music/damage3.mp3']
+      });
+
+      damageEffects.push(damageEffect1);
+      damageEffects.push(damageEffect2);
+      damageEffects.push(damageEffect3);
+
+      var areas = ['holyland','village','mountains','desert','drylands','forest','city','swamp','fiery'];
+      for(var i = 0; i<areas.length; i++) {
+        var songPath = 'assets/music/'+areas[i]+'.mp3';
+        situations[areas[i]] = {
+          id: '#'+areas[i],
+          mainSong: new Howl({src:[songPath],volume:0.5,loop:true}),
+          play: function(){
+            if(battlePlaying) {
+              battleMusic.stop();
+              $('#battle').removeAttr('style');
+            }
+            battlePlaying = false;
+            for(var i = 0; i<playing.length; i++) {
+              playing[i].stop();
+            }
+            playing = [];
+            playing.push(this.mainSong);
+            this.mainSong.play();
+          }
+        };
+      }
+
+      for(const situation in situations) {
+        var id = '#'+situation;
+        $(id).click(function() {
+          situations[situation].play();
+        });
+      }
+
+      $('#startbutton').mouseenter(function() {
+        bgMusic.play();
+        $(this).mouseleave(function() {
+          bgMusic.stop();
+        });
+      });
+
+      $('#startbutton').click(function() {
+        if(!bgMusic.playing()){
+          bgMusic.play();
+        }
+      });
+
+      $('#health').on("click", function() {
+        healthEffect.play();
+      });
+
+      $('#damage').on("click", function() {
+        var choice = Math.floor(Math.random()*damageEffects.length);
+        damageEffects[choice].play();
+      });
+
+      $('#battle').on("click", function() {
+        if(battleMusic.playing()){
+          battlePlaying = false;
+          battleMusic.stop();
+          $('#pause').children().removeClass('fa-play').addClass('fa-pause');
+          $(this).removeAttr('style');
+          for(var i = 0; i<playing.length; i++){
+            playing[i].play();
+          }
+        } else {
+          for(var i = 0; i<playing.length; i++){
+            playing[i].stop();
+          }
+          battlePlaying = true;
+          $('#pause').children().removeClass('fa-play').addClass('fa-pause');
+          $(this).css("color","white");
+          battleMusic.play();
+        }
+      });
+
+      $('#pause').on("click", function() {
+        if($(this).children().hasClass('fa-pause')) {
+          $(this).children().removeClass('fa-pause').addClass('fa-play');
+          if(battlePlaying){
+            $('#battle').removeAttr('style');
+            battleMusic.pause();
+          } else {
+            for(var i = 0; i<playing.length; i++) {
+              playing[i].pause();
+            }
+          }
+        } else {
+          $(this).children().removeClass('fa-play').addClass('fa-pause');
+          if(battlePlaying){
+            $('#battle').css("color","white");
+            battleMusic.play();
+          } else {
+            for(var i = 0; i<playing.length; i++) {
+              playing[i].play();
+            }
+          }
+        }
+      });
+
+      $('#rewind').on("click", function() {
+        if(battlePlaying) {
+          battleMusic.stop();
+          battleMusic.play();
+        } else {
+          for(var i = 0; i<playing.length; i++) {
+            playing[i].stop();
+            playing[i].play();
+          }
+        }
+      });
+
+      $('#end').on("click", function() {
+        if(battlePlaying) {
+          battleMusic.stop();
+          battlePlaying = false;
+        } else {
+          for(var i = 0; i<playing.length; i++) {
+            playing[i].stop();
+          }
+        }
+        $('#pause').children().removeClass('fa-pause').addClass('fa-play');
+      });
+
+      $('#volume-slider').on("change", function() {
+        for(var i = 0; i<playing.length; i++){
+          playing[i].volume($(this).val()/100)
+        }
+      });
+
+      var playlist = document.getElementById('playlist-full-list');
+      var sortable = Sortable.create(playlist, {
+        animation: 150,
+        dragClass: "drag",
+        ghostClass: "ghost",
+        onEnd: function(evt) {
+          var textList = $('#playlist-full-list').children().find('span');
+          var songList = [];
+          for(var i = 0; i<textList.length; i++) {
+            songList.push(textList[i].textContent);
+          }
+          console.log(songList);
+        }
+      });
+
+    </script>
+    <script type="text/javascript" src="assets/js/scripts/dnd.js"></script>
+  </body>
+</html>

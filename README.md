@@ -6,3 +6,5 @@
  Uses <strong>Howler.js</strong>.
  
 <em>Vision</em> button and song playlists currently do not work.
+
+To run, download full repo, and open <strong>index.html</strong>.
